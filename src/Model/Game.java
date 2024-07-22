@@ -8,15 +8,16 @@ import static Model.Strategies.AlwaysDefect.AlwaysDefectFactory;
 import static Model.Strategies.Strategy.StrategyType.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Game {
-   public int gridSize = 20;
    public long nbOfRounds = (long) 1e7;
    public int memory = 3;
     public double proportionOfDefectors= 0;
-    public int nbOfPlayers;
-   Player[][] grid;
+    public int nbOfPlayers = 400;
+    public int nbOfNeighbours= 20;
+    Player[] playingField;
     ArrayList<Player> players;
     int range = 2;
 
@@ -26,7 +27,8 @@ public class Game {
         playFromFile();
     }
 
-    public Game(int memory, double proportionOfDefectors){
+    public Game(int memory, double proportionOfDefectors, int nbOfNeighbours){
+        this.nbOfNeighbours = nbOfNeighbours;
         this.memory = memory;
         this.proportionOfDefectors = proportionOfDefectors;
         intializeValues();
@@ -38,6 +40,7 @@ public class Game {
 
     public Game() {
     }
+
     private static void playFromFile() {
         Game game = new Game();
         GameOutcome gameOutcome = new GameOutcome(game);
@@ -49,19 +52,16 @@ public class Game {
 
     private void intializeValues(FileReader fileReader) {
         rand = new Random();
-        gridSize = fileReader.getGridSize();
         nbOfRounds = fileReader.getNbOfRounds();
         memory = fileReader.getMemory();
         proportionOfDefectors = fileReader.getProportionOfDefectors();
         range = fileReader.getRange();
-        nbOfPlayers = (int) Math.pow(gridSize,2);
-        grid = new Player[gridSize][gridSize];
+        playingField = new Player[nbOfPlayers];
         players = new ArrayList<>();
     }
     private void intializeValues() {
         rand = new Random();
-        nbOfPlayers = (int) Math.pow(gridSize,2);
-        grid = new Player[gridSize][gridSize];
+        playingField = new Player[nbOfPlayers];
         players = new ArrayList<>();
     }
 
@@ -76,11 +76,10 @@ public class Game {
         return players.get((rand.nextInt() & Integer.MAX_VALUE) % players.size());
     }
 
-    public Player getPlayer(int x, int y){return grid[x][y];}
+    public Player getPlayer(int index){return playingField[index];}
     public void createGame() {
         initPlayers();
         initStrategies(proportionOfDefectors);
-        determineNeighbours(players);
     }
 
     private void initStrategies(double proportionDefectors) {
@@ -96,45 +95,21 @@ public class Game {
     }
 
     private void initPlayers(){
-        int playerId = 0;
-        int x = 0;
-        int y = 0;
-        while(y < gridSize){
-            while(x < gridSize){
-                Player p = new Player(new Position(x,y), playerId, this);
-                playerId++;
-                grid[x][y]=p;
-                players.add(p);
-                x++;
-            }
-            x = 0;
-            y++;
+        for (int i = 0; i< nbOfPlayers; i++){
+            Player p = new Player(i, this);
+            playingField[i]=p;
+            players.add(p);
         }
     }
-    private void determineNeighbours(ArrayList<Player> players){
-        for(Player p: players){
-            determineNeighbours(range, p);
-        }
-    }
-    public static void determineNeighbours(int range, Player p){
-        determineNeighbours(range, p, p);
-    }
-    public static void determineNeighbours(int range, Player neighbour, Player player){
-        if (!player.getNeighbours().contains(neighbour) && !neighbour.equals(player)) {player.getNeighbours().add(neighbour);}
-        if (range == 0) {return;}
-        for(Player p : neighbour.getCloseNeighbours()){
-            determineNeighbours(range-1, p, player);
-        }
-    }
-
     @Override
     public String toString() {
         return "Game{" +
-                "gridSize=" + gridSize +
-                ", nbOfRounds=" + nbOfRounds +
+                "nbOfRounds=" + nbOfRounds +
                 ", memory=" + memory +
                 ", proportionOfDefectors=" + proportionOfDefectors +
                 ", nbOfPlayers=" + nbOfPlayers +
+                ", playingField=" + Arrays.toString(playingField) +
+                ", players=" + players +
                 ", range=" + range +
                 '}';
     }

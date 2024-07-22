@@ -42,7 +42,7 @@ public class StrategyOutcome {
 
     @Override
     public String toString() {
-        return game.proportionOfDefectors + "," + game.memory + "," + strategyType + "," + nbOfPlayers + "," + avgScore + "," + totalScore;
+        return game.proportionOfDefectors + "," + game.nbOfNeighbours + "," + game.memory + "," + strategyType + "," + avgScore;
 
 
 //        return "{proportionDefectors=" + game.proportionOfDefectors +
