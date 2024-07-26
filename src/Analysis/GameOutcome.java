@@ -5,7 +5,6 @@ import Model.Game;
 import Model.Player;
 
 import  Model.Strategies.Strategy.StrategyType;
-import  Controller.ResultsWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

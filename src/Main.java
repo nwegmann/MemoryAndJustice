@@ -6,16 +6,16 @@ public class Main {
        double proportionDefectors = 0.1;
 
         while (proportionDefectors < 0.99) {
-            int memory = 5;
-            while (memory<= 200){
+            int memory = 1;
+            while (memory<= 70){
                 int nbOfNeighbours = 10;
                 while (nbOfNeighbours < 100) {
                     new Game(memory, proportionDefectors, nbOfNeighbours);
                     nbOfNeighbours+= 10;
                 }
-                memory += 5;
+                memory += 1;
             }
-            proportionDefectors += 0.05;
+            proportionDefectors += 0.1;
 
 
 /*
