@@ -1,21 +1,17 @@
 package Controller;
 
-import Model.Strategies.GrudgeStar;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileReader {
-    static public int gridSize = 100;
-    static public long nbOfRounds;
-    static public int memory;
-    static public double proportionOfDefectors;
+    static private long nbOfRounds;
+    static private int memory;
+    static private double proportionOfDefectors;
+    static private boolean grudgeStar;
+    static private int nbOfNeighbors;
 
-    static public boolean grudgeStar;
-    static int range = 3;
-
-        public FileReader(String filePath){
+    public FileReader(String filePath){
             try {
                 Scanner scanner = new Scanner(new File(filePath));
                 while (scanner.hasNextLine()) {
@@ -24,27 +20,19 @@ public class FileReader {
                      continue;
                     }
                     if(data.startsWith("PROPORTION DEFECTORS")){
-                        float temp = Float.parseFloat(getNumberString(data));
-                        proportionOfDefectors = temp;
+                        proportionOfDefectors = Float.parseFloat(getNumberString(data));
                     }
                     if(data.startsWith("MEMORY")){
-                        Integer temp = Integer.parseInt(getNumberString(data));
-                        memory = temp;
-                    }
-                    if(data.startsWith("GRID SIZE")){
-                        int temp = Integer.parseInt(getNumberString(data));
-                        gridSize = temp;
+                        memory = Integer.parseInt(getNumberString(data));
                     }
                     if(data.startsWith("NB OF NEIGHBOURS")){
-                        int temp = Integer.parseInt(data.split(":")[1].trim());
-                        range = temp;
+                        nbOfNeighbors = Integer.parseInt(data.split(":")[1].trim());
                     }
                     if(data.startsWith("NB OF ROUNDS")){
-                        double temp = Double.parseDouble(data.split(":")[1].trim());
-                        nbOfRounds = (long) temp;
+                        nbOfRounds = (long) Double.parseDouble(data.split(":")[1].trim());
                     }
                     if(data.startsWith("GRUDGE*")){
-                        grudgeStar = data.split(":")[1].trim().toLowerCase().equals("t");
+                        grudgeStar = Character.toString(data.split(":")[1].trim().charAt(0)).equalsIgnoreCase("t");
                     }
 
                 }
@@ -70,8 +58,8 @@ public class FileReader {
         return proportionOfDefectors;
     }
 
-    public static int getRange() {
-        return range;
+    public static int getNbOfNeighbors() {
+        return nbOfNeighbors;
     }
 
     public boolean isGrudgeStar() { return grudgeStar;

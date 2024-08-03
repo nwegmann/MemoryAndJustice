@@ -6,31 +6,31 @@ import static Model.Game.playFromFile;
 public class Main {
 
     //PROPORTION DEFECTORS:
-    static  double proportionDefectorsMin = 0.1;
+    static double proportionDefectorsMin = 0.1;
     static double proportionDefectorsMax = 0.9;
-    static   double proportionDefectorsIncrement = 0.1;
+    static double proportionDefectorsIncrement = 0.1;
 
     //MEMORY:
-    static int memoryMin = 5;
+    static int memoryMin = 10;
     static int memoryMax = 100;
-    static  int memoryIncrement = 5;
+    static int memoryIncrement = 10;
 
     //NUMBER OF NEIGHBORS:
-    static int nbNeighborsMin = 5;
+    static int nbNeighborsMin = 10;
     static int nbNeighborsMax = 100;
-    static  int nbNeighborsIncrement = 1;
+    static int nbNeighborsIncrement = 1;
 
     //GRUDGE*:
-    static boolean grudgeStar = false;
+    static boolean grudgeStar = true;
 
 
     public static void main(String[] args) {
 
         //RUN FROM FILE:
-        //playFromFile("src/Resources/SimulationValues.txt");
+        playFromFile("src/Resources/SimulationValues.txt");
 
         //RUN MULTIPLE SIMULATIONS
-        runSimulations();
+        //runSimulations();
     }
 
     private static void runSimulations() {

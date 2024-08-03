@@ -11,13 +11,13 @@ import static Model.Strategies.Strategy.*;
 
 
 public class Player {
+
     int[] defectorsArray;
     Strategy strategy;
-
     Game game;
     int score = 0;
-
     int playerIndex;
+
     public Player(int playerIndex, Game game, boolean grudgeStar) {
         this.game = game;
         defectorsArray = new int[game.nbOfPlayers];

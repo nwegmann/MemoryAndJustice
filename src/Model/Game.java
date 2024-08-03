@@ -12,16 +12,16 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Game {
-   public long nbOfRounds = (long) 1e7;
-   public int memory = 3;
-    public double proportionOfDefectors= 0;
+    public long nbOfRounds = (long) 1e7;
     public int nbOfPlayers = 400;
-    public int nbOfNeighbours= 20;
 
-    public boolean grudgeStar = false;
+    public int memory;
+    public double proportionOfDefectors;
+    public int nbOfNeighbours;
+    public boolean grudgeStar;
+
     Player[] playingField;
     ArrayList<Player> players;
-    int range = 2;
     static Random rand;
 
     public Game(int memory, double proportionOfDefectors, int nbOfNeighbours, boolean grudgeStar){
@@ -35,8 +35,7 @@ public class Game {
         gameOutcome.analyze(this.players, new ResultsWriter(), this);
     };
 
-    public Game() {}
-
+    public Game(){}
 
     public static void playFromFile(String path) {
         Game game = new Game();
@@ -50,10 +49,10 @@ public class Game {
     private void intializeValues(FileReader fileReader) {
         rand = new Random();
         grudgeStar = fileReader.isGrudgeStar();
+        nbOfNeighbours = fileReader.getNbOfNeighbors();
         nbOfRounds = fileReader.getNbOfRounds();
         memory = fileReader.getMemory();
         proportionOfDefectors = fileReader.getProportionOfDefectors();
-        range = fileReader.getRange();
         playingField = new Player[nbOfPlayers];
         players = new ArrayList<>();
     }
@@ -109,7 +108,6 @@ public class Game {
                 ", nbOfPlayers=" + nbOfPlayers +
                 ", playingField=" + Arrays.toString(playingField) +
                 ", players=" + players +
-                ", range=" + range +
                 '}';
     }
 }
