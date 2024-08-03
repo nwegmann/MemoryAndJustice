@@ -11,16 +11,8 @@ public class StrategyOutcome {
 
     Game game;
 
-    public StrategyType getStrategyType() {
-        return strategyType;
-    }
-
     public int getNbOfPlayers() {
         return nbOfPlayers;
-    }
-
-    public double getAvgScore() {
-        return avgScore;
     }
 
     public long getTotalScore() {
@@ -44,17 +36,5 @@ public class StrategyOutcome {
     public String toString() {
         return game.proportionOfDefectors + "," + game.nbOfNeighbours + "," + game.memory + "," + strategyType + "," + avgScore;
 
-
-//        return "{proportionDefectors=" + game.proportionOfDefectors +
-//                ", memory=" + game.memory +
-//                ", strategyType=" + strategyType +
-//                ", nbOfPlayers=" + nbOfPlayers +
-//                ", avgScore=" + avgScore +
-//                ", totalScore=" + totalScore +
-//                '}';
     }
-
-  /*  public String printJson(){
-
-    }*/
 }

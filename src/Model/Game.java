@@ -17,41 +17,39 @@ public class Game {
     public double proportionOfDefectors= 0;
     public int nbOfPlayers = 400;
     public int nbOfNeighbours= 20;
+
+    public boolean grudgeStar = false;
     Player[] playingField;
     ArrayList<Player> players;
     int range = 2;
-
     static Random rand;
 
-    public static void main(String[] args) {
-        playFromFile();
-    }
-
-    public Game(int memory, double proportionOfDefectors, int nbOfNeighbours){
+    public Game(int memory, double proportionOfDefectors, int nbOfNeighbours, boolean grudgeStar){
         this.nbOfNeighbours = nbOfNeighbours;
         this.memory = memory;
         this.proportionOfDefectors = proportionOfDefectors;
         intializeValues();
-        createGame();
+        createGame(grudgeStar);
         this.launch();
         GameOutcome gameOutcome = new GameOutcome(this);
         gameOutcome.analyze(this.players, new ResultsWriter(), this);
     };
 
-    public Game() {
-    }
+    public Game() {}
 
-    private static void playFromFile() {
+
+    public static void playFromFile(String path) {
         Game game = new Game();
-        GameOutcome gameOutcome = new GameOutcome(game);
-        game.intializeValues(new FileReader("src/Resources/SimulationValues.txt"));
-        game.createGame();
+        game.intializeValues(new FileReader(path));
+        game.createGame(game.grudgeStar);
         game.launch();
+        GameOutcome gameOutcome = new GameOutcome(game);
         gameOutcome.analyze(game.players, new ResultsWriter(), game);
     }
 
     private void intializeValues(FileReader fileReader) {
         rand = new Random();
+        grudgeStar = fileReader.isGrudgeStar();
         nbOfRounds = fileReader.getNbOfRounds();
         memory = fileReader.getMemory();
         proportionOfDefectors = fileReader.getProportionOfDefectors();
@@ -65,7 +63,6 @@ public class Game {
         players = new ArrayList<>();
     }
 
-
     private void launch() {
         for(int i = 0; i< nbOfRounds; i++){
             new Round(players);
@@ -76,9 +73,8 @@ public class Game {
         return players.get((rand.nextInt() & Integer.MAX_VALUE) % players.size());
     }
 
-    public Player getPlayer(int index){return playingField[index];}
-    public void createGame() {
-        initPlayers();
+    public void createGame(boolean grudgeStar) {
+        initPlayers(grudgeStar);
         initStrategies(proportionOfDefectors);
     }
 
@@ -94,9 +90,9 @@ public class Game {
         }
     }
 
-    private void initPlayers(){
+    private void initPlayers(boolean grudgeStar){
         for (int i = 0; i< nbOfPlayers; i++){
-            Player p = new Player(i, this);
+            Player p = new Player(i, this, grudgeStar);
             playingField[i]=p;
             players.add(p);
         }

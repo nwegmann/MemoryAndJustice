@@ -7,14 +7,11 @@ import java.util.ArrayList;
 public abstract class Strategy {
     StrategyType strategyType;
 
-    public void gotDefectedBy(Player defector) {
-    }
+    abstract public void initializeDefectors(Player player);
 
     public enum StrategyType{
         ALWAYS_DEFECT,
-        GRUDGE,
-        GRUDGE_STAR
-
+        GRUDGE
     }
 
     public StrategyType getStrategyType() {

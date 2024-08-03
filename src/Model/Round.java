@@ -7,14 +7,13 @@ import static Model.Strategies.Strategy.*;
 import static Model.Strategies.Strategy.Move.*;
 import static Model.Payoff.*;
 
-
 public class Round {
     static Random rand = new Random();
 
     public Round(ArrayList<Player> players) {
         int nbPlayers = players.size();
         Player p1 = players.get((rand.nextInt() & Integer.MAX_VALUE) % nbPlayers);
-        Player p2 = p1.getRandomNeighbour();
+        Player p2 = p1.getRandomNeighbor();
         playPD(p1,p2);
         }
 

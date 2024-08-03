@@ -3,10 +3,8 @@ package Model;
 import Model.Strategies.Grudge;
 import Model.Strategies.GrudgeStar;
 import Model.Strategies.Strategy;
-import java.util.ArrayList;
 import java.util.Random;
 
-import static Model.Game.*;
 import static Model.Strategies.Strategy.StrategyType;
 import static Model.Strategies.Strategy.*;
 
@@ -17,20 +15,18 @@ public class Player {
     Strategy strategy;
 
     Game game;
-    Position pos;
     int score = 0;
 
     int playerIndex;
-    public Player(int playerIndex, Game game) {
-        //defectorsList = new HashMap<>();
+    public Player(int playerIndex, Game game, boolean grudgeStar) {
         this.game = game;
         defectorsArray = new int[game.nbOfPlayers];
         //DEFAULT STRATEGY
-        strategy = new Grudge(this);
+        strategy = grudgeStar ? new GrudgeStar(this) : new Grudge(this);
         this.playerIndex = playerIndex;
     }
 
-    public Player getRandomNeighbour() {
+    public Player getRandomNeighbor() {
         Random rand = new Random();
         int index = ((rand.nextInt() & Integer.MAX_VALUE) % game.nbOfNeighbours) - game.nbOfNeighbours / 2;
         if (this.playerIndex + index < 0) {
@@ -58,6 +54,8 @@ public class Player {
     public Strategy getStrategy() {
         return strategy;
     }
+
+    public Game getGame(){return game;}
 
     public StrategyType getStrategyType(){
         return this.getStrategy().getStrategyType();
@@ -88,11 +86,6 @@ public class Player {
     }
 
     public void initializeDefectors() {
-        for(int i = 1; i <= game.memory; i++){
-            Player p = getRandomNeighbour();
-            if(p.isDefector()){
-                defectorsArray[p.playerIndex]= i;
-            }
-        }
+        this.strategy.initializeDefectors(this);
     }
 }

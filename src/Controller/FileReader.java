@@ -1,10 +1,9 @@
 package Controller;
 
-import Model.Player;
+import Model.Strategies.GrudgeStar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReader {
@@ -12,6 +11,8 @@ public class FileReader {
     static public long nbOfRounds;
     static public int memory;
     static public double proportionOfDefectors;
+
+    static public boolean grudgeStar;
     static int range = 3;
 
         public FileReader(String filePath){
@@ -47,6 +48,11 @@ public class FileReader {
                         System.out.println(temp);
                         nbOfRounds = (long) temp;
                     }
+                    if(data.startsWith("GRUDGE*")){
+                        grudgeStar = data.split(":")[1].trim().toLowerCase().equals("t");
+                        System.out.println(grudgeStar);
+                    }
+
                 }
                 scanner.close();
             } catch (FileNotFoundException e) {
@@ -56,10 +62,6 @@ public class FileReader {
         }
     private static String getNumberString(String data){
             return data.split(":")[1].trim();
-    }
-
-    public static int getGridSize() {
-        return gridSize;
     }
 
     public static long getNbOfRounds() {
@@ -76,6 +78,9 @@ public class FileReader {
 
     public static int getRange() {
         return range;
+    }
+
+    public boolean isGrudgeStar() { return grudgeStar;
     }
 }
 

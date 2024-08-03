@@ -7,6 +7,10 @@ public class AlwaysDefect extends Strategy{
     static boolean exist = false;
 
     static AlwaysDefect alwaysDefect = AlwaysDefectFactory();
+
+    @Override
+    public void initializeDefectors(Player player) {}
+
     @Override
     public Move nextMove(Player opponent){
         return DEFECT;
