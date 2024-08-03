@@ -3,11 +3,11 @@ package Model;
 import Model.Strategies.Grudge;
 import Model.Strategies.GrudgeStar;
 import Model.Strategies.Strategy;
+
 import java.util.Random;
 
 import static Model.Strategies.Strategy.StrategyType;
 import static Model.Strategies.Strategy.*;
-
 
 
 public class Player {
@@ -39,7 +39,7 @@ public class Player {
         return game.playingField[this.playerIndex + index];
     }
 
-    public int[] getDefectorsArray(){
+    public int[] getDefectorsArray() {
         return defectorsArray;
     }
 
@@ -55,9 +55,11 @@ public class Player {
         return strategy;
     }
 
-    public Game getGame(){return game;}
+    public Game getGame() {
+        return game;
+    }
 
-    public StrategyType getStrategyType(){
+    public StrategyType getStrategyType() {
         return this.getStrategy().getStrategyType();
     }
 
@@ -65,8 +67,8 @@ public class Player {
         return playerIndex;
     }
 
-    public Move nextMove(Player opponent){
-        if(this.strategy == null){
+    public Move nextMove(Player opponent) {
+        if (this.strategy == null) {
             System.out.println("Strategy not initialized");
             return null;
         }
@@ -81,7 +83,7 @@ public class Player {
         return score;
     }
 
-    public boolean isDefector(){
+    public boolean isDefector() {
         return (this.strategy.getStrategyType() == StrategyType.ALWAYS_DEFECT);
     }
 

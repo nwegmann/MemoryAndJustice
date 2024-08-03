@@ -2,14 +2,12 @@ package Model.Strategies;
 
 import Model.Player;
 
-import java.util.ArrayList;
-
 public abstract class Strategy {
     StrategyType strategyType;
 
     abstract public void initializeDefectors(Player player);
 
-    public enum StrategyType{
+    public enum StrategyType {
         ALWAYS_DEFECT,
         GRUDGE
     }
@@ -20,7 +18,7 @@ public abstract class Strategy {
 
     public enum Move {
         DEFECT,
-        COOPERATE;
+        COOPERATE
     }
 
     public abstract Move nextMove(Player opponent);

@@ -24,7 +24,7 @@ public class Game {
     ArrayList<Player> players;
     static Random rand;
 
-    public Game(int memory, double proportionOfDefectors, int nbOfNeighbours, boolean grudgeStar){
+    public Game(int memory, double proportionOfDefectors, int nbOfNeighbours, boolean grudgeStar) {
         this.nbOfNeighbours = nbOfNeighbours;
         this.memory = memory;
         this.proportionOfDefectors = proportionOfDefectors;
@@ -35,7 +35,8 @@ public class Game {
         gameOutcome.analyze(this.players, new ResultsWriter(), this);
     }
 
-    public Game(){}
+    public Game() {
+    }
 
     public static void playFromFile(String path) {
         Game game = new Game();
@@ -56,6 +57,7 @@ public class Game {
         playingField = new Player[nbOfPlayers];
         players = new ArrayList<>();
     }
+
     private void intializeValues() {
         rand = new Random();
         playingField = new Player[nbOfPlayers];
@@ -63,12 +65,12 @@ public class Game {
     }
 
     private void launch() {
-        for(int i = 0; i< nbOfRounds; i++){
+        for (int i = 0; i < nbOfRounds; i++) {
             new Round(players);
         }
     }
 
-    public static Player getRandomPlayer(ArrayList<Player> players){
+    public static Player getRandomPlayer(ArrayList<Player> players) {
         return players.get((rand.nextInt() & Integer.MAX_VALUE) % players.size());
     }
 
@@ -78,27 +80,32 @@ public class Game {
     }
 
     private void initStrategies(double proportionDefectors) {
-        if (!(proportionDefectors <= 1 && proportionDefectors >= 0)){throw new RuntimeException("Proportion of defectors has to be between 0 and 1.");}
+        if (!(proportionDefectors <= 1 && proportionDefectors >= 0)) {
+            throw new RuntimeException("Proportion of defectors has to be between 0 and 1.");
+        }
         int nbOfDefectors = (int) (nbOfPlayers * proportionDefectors);
         int nbOfDefectorsInit = 0;
-        while(nbOfDefectorsInit < nbOfDefectors){
+        while (nbOfDefectorsInit < nbOfDefectors) {
             Player player = getRandomPlayer(players);
-            if(player.getStrategy().getStrategyType() == ALWAYS_DEFECT){continue;}
+            if (player.getStrategy().getStrategyType() == ALWAYS_DEFECT) {
+                continue;
+            }
             player.setStrategy(AlwaysDefectFactory());
             nbOfDefectorsInit++;
         }
     }
 
-    private void initPlayers(boolean grudgeStar){
-        for (int i = 0; i< nbOfPlayers; i++){
+    private void initPlayers(boolean grudgeStar) {
+        for (int i = 0; i < nbOfPlayers; i++) {
             Player p = new Player(i, this, grudgeStar);
-            playingField[i]=p;
+            playingField[i] = p;
             players.add(p);
         }
-        for(Player p : players){
-            if(p.getStrategyType()!= ALWAYS_DEFECT)p.initializeDefectors();
+        for (Player p : players) {
+            if (p.getStrategyType() != ALWAYS_DEFECT) p.initializeDefectors();
         }
     }
+
     @Override
     public String toString() {
         return "Game{" +

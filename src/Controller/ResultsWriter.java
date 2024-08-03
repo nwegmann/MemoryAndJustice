@@ -11,7 +11,8 @@ import java.io.IOException;
 
 public class ResultsWriter {
     FileWriter fileWriter;
-    public void writeResults(GameOutcome gameOutcome, Game game){
+
+    public void writeResults(GameOutcome gameOutcome) {
         try {
             fileWriter = new FileWriter(new File("src/Resources", "results.txt"), true);
             fileWriter.write(gameOutcome.toString());
@@ -21,8 +22,8 @@ public class ResultsWriter {
         close();
     }
 
-    public void close(){
-        try{
+    public void close() {
+        try {
             fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

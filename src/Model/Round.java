@@ -14,29 +14,31 @@ public class Round {
         int nbPlayers = players.size();
         Player p1 = players.get((rand.nextInt() & Integer.MAX_VALUE) % nbPlayers);
         Player p2 = p1.getRandomNeighbor();
-        playPD(p1,p2);
-        }
+        playPD(p1, p2);
+    }
 
     private void playPD(Player p1, Player p2) {
         Move p1Move = p1.nextMove(p2);
         Move p2Move = p2.nextMove(p1);
-        if(p1Move == COOPERATE) {
+        if (p1Move == COOPERATE) {
             if (p2Move == COOPERATE) {
                 p1.incrementScore(REWARD);
                 p2.incrementScore(REWARD);
-            }if(p2Move == DEFECT){
+            }
+            if (p2Move == DEFECT) {
                 p1.incrementScore(SUCKER);
                 p2.incrementScore(TEMPTATION);
                 p1.gotDefectedBy(p2);
             }
         }
-        if(p1Move == DEFECT){
-            if(p2Move == DEFECT){
+        if (p1Move == DEFECT) {
+            if (p2Move == DEFECT) {
                 p1.incrementScore(PUNISHMENT);
                 p2.incrementScore(PUNISHMENT);
                 p1.gotDefectedBy(p2);
                 p2.gotDefectedBy(p1);
-            }if(p2Move == COOPERATE){
+            }
+            if (p2Move == COOPERATE) {
                 p1.incrementScore(TEMPTATION);
                 p2.incrementScore(SUCKER);
                 p2.gotDefectedBy(p1);

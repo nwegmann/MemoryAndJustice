@@ -29,7 +29,7 @@ public class StrategyOutcome {
     public void integratePlayer(Player p) {
         nbOfPlayers++;
         totalScore += p.getScore();
-        avgScore = (double) totalScore /nbOfPlayers;
+        avgScore = (double) totalScore / nbOfPlayers;
     }
 
     @Override

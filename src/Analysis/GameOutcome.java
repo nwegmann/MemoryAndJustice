@@ -4,7 +4,7 @@ import Controller.ResultsWriter;
 import Model.Game;
 import Model.Player;
 
-import  Model.Strategies.Strategy.StrategyType;
+import Model.Strategies.Strategy.StrategyType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class GameOutcome {
     public long totalScore = 0;
     public long nbOfPlayers = 0;
 
-    private Game game;
+    private final Game game;
 
     public HashMap<StrategyType, StrategyOutcome> scoreMap;
 
@@ -42,7 +42,7 @@ public class GameOutcome {
         integratePlayers(players);
         aggregateStrategies();
         printResults();
-        rw.writeResults(this, game);
+        rw.writeResults(this);
 
     }
 
@@ -56,18 +56,17 @@ public class GameOutcome {
         for (StrategyType s : StrategyType.values()) {
             totalScore = scoreMap.get(s).getTotalScore() + totalScore;
             nbOfPlayers = scoreMap.get(s).getNbOfPlayers() + nbOfPlayers;
-            avgScore = nbOfPlayers <= 0 ? avgScore : totalScore / nbOfPlayers;
+            avgScore = nbOfPlayers <= 0 ? avgScore : (double) totalScore / nbOfPlayers;
         }
     }
 
     @Override
     public String toString() {
-        String temp = "";
+        StringBuilder temp = new StringBuilder();
         for (StrategyType st : StrategyType.values()) {
-            temp = temp + scoreMap.get(st) + "\n";
+            temp.append(scoreMap.get(st)).append("\n");
         }
-        return temp;
-
+        return temp.toString();
     }
 
 }

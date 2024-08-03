@@ -27,10 +27,10 @@ public class Main {
     public static void main(String[] args) {
 
         //RUN FROM FILE:
-        playFromFile("src/Resources/SimulationValues.txt");
+        //playFromFile("src/Resources/SimulationValues.txt");
 
         //RUN MULTIPLE SIMULATIONS
-        //runSimulations();
+        runSimulations();
     }
 
     private static void runSimulations() {
@@ -38,11 +38,11 @@ public class Main {
 
         while (proportionDefectors <= proportionDefectorsMax) {
             int memory = memoryMin;
-            while (memory <= memoryMax){
+            while (memory <= memoryMax) {
                 int nbOfNeighbours = nbNeighborsMin;
                 while (nbOfNeighbours <= nbNeighborsMax) {
                     new Game(memory, proportionDefectors, nbOfNeighbours, grudgeStar);
-                    nbOfNeighbours+= nbNeighborsIncrement;
+                    nbOfNeighbours += nbNeighborsIncrement;
                 }
                 memory += memoryIncrement;
             }
