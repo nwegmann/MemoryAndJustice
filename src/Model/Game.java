@@ -100,6 +100,9 @@ public class Game {
             playingField[i]=p;
             players.add(p);
         }
+        for(Player p : players){
+            if(p.getStrategyType()!= ALWAYS_DEFECT)p.initializeDefectors();
+        }
     }
     @Override
     public String toString() {

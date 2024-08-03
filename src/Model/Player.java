@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Strategies.Grudge;
+import Model.Strategies.GrudgeStar;
 import Model.Strategies.Strategy;
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,6 +25,7 @@ public class Player {
         //defectorsList = new HashMap<>();
         this.game = game;
         defectorsArray = new int[game.nbOfPlayers];
+        //DEFAULT STRATEGY
         strategy = new Grudge(this);
         this.playerIndex = playerIndex;
     }
@@ -79,5 +81,18 @@ public class Player {
 
     public int getScore() {
         return score;
+    }
+
+    public boolean isDefector(){
+        return (this.strategy.getStrategyType() == StrategyType.ALWAYS_DEFECT);
+    }
+
+    public void initializeDefectors() {
+        for(int i = 1; i <= game.memory; i++){
+            Player p = getRandomNeighbour();
+            if(p.isDefector()){
+                defectorsArray[p.playerIndex]= i;
+            }
+        }
     }
 }

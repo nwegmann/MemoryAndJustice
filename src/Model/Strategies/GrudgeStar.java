@@ -10,8 +10,9 @@ import java.util.Iterator;
 import static Model.Strategies.Strategy.Move.COOPERATE;
 import static Model.Strategies.Strategy.Move.DEFECT;
 import static Model.Strategies.Strategy.StrategyType.GRUDGE;
+import static Model.Strategies.Strategy.StrategyType.GRUDGE_STAR;
 
-public class Grudge extends Strategy{
+public class GrudgeStar extends Strategy{
 
     int[] defectorsArray;
     @Override
@@ -20,7 +21,6 @@ public class Grudge extends Strategy{
             decrementDefectorsList();
             return DEFECT;
         }else{
-            decrementDefectorsList();
             return COOPERATE;}
     }
 
@@ -42,8 +42,8 @@ public class Grudge extends Strategy{
         }
     }
 
-    public Grudge(Player player){
-        this.strategyType = GRUDGE;
+    public GrudgeStar(Player player){
+        this.strategyType = GRUDGE_STAR;
         //defectors list before
         defectorsArray = player.getDefectorsArray();
     }

@@ -12,7 +12,8 @@ public abstract class Strategy {
 
     public enum StrategyType{
         ALWAYS_DEFECT,
-        GRUDGE
+        GRUDGE,
+        GRUDGE_STAR
 
     }
 
