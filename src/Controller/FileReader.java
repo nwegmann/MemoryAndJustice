@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileReader {
-    static private long nbOfRounds;
-    static private int memory;
-    static private double proportionOfDefectors;
-    static private boolean grudgeStar;
-    static private int nbOfNeighbors;
+    private long nbOfRounds;
+    private int memory;
+    private double proportionOfDefectors;
+    private boolean grudgeStar;
+    private int nbOfNeighbors;
 
     public FileReader(String filePath){
             try {
@@ -46,19 +46,19 @@ public class FileReader {
             return data.split(":")[1].trim();
     }
 
-    public static long getNbOfRounds() {
+    public long getNbOfRounds() {
         return nbOfRounds;
     }
 
-    public static int getMemory() {
+    public int getMemory() {
         return memory;
     }
 
-    public static double getProportionOfDefectors() {
+    public double getProportionOfDefectors() {
         return proportionOfDefectors;
     }
 
-    public static int getNbOfNeighbors() {
+    public int getNbOfNeighbors() {
         return nbOfNeighbors;
     }
 

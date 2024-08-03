@@ -33,7 +33,7 @@ public class Game {
         this.launch();
         GameOutcome gameOutcome = new GameOutcome(this);
         gameOutcome.analyze(this.players, new ResultsWriter(), this);
-    };
+    }
 
     public Game(){}
 
