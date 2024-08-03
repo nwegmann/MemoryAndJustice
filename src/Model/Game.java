@@ -32,7 +32,7 @@ public class Game {
         createGame(grudgeStar);
         this.launch();
         GameOutcome gameOutcome = new GameOutcome(this);
-        gameOutcome.analyze(this.players, new ResultsWriter(), this);
+        gameOutcome.analyze(this.players, new ResultsWriter());
     }
 
     public Game() {
@@ -44,7 +44,7 @@ public class Game {
         game.createGame(game.grudgeStar);
         game.launch();
         GameOutcome gameOutcome = new GameOutcome(game);
-        gameOutcome.analyze(game.players, new ResultsWriter(), game);
+        gameOutcome.analyze(game.players, new ResultsWriter());
     }
 
     private void intializeValues(FileReader fileReader) {
