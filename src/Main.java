@@ -13,7 +13,7 @@ public class Main {
     //MEMORY:
     static int memoryMin = 10;
     static int memoryMax = 100;
-    static int memoryIncrement = 10;
+    static int memoryIncrement = 5;
 
     //NUMBER OF NEIGHBORS:
     static int nbNeighborsMin = 10;
