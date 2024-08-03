@@ -25,32 +25,26 @@ public class FileReader {
                     }
                     if(data.startsWith("PROPORTION DEFECTORS")){
                         float temp = Float.parseFloat(getNumberString(data));
-                        System.out.println(temp);
                         proportionOfDefectors = temp;
                     }
                     if(data.startsWith("MEMORY")){
                         Integer temp = Integer.parseInt(getNumberString(data));
-                        System.out.println(temp);
                         memory = temp;
                     }
                     if(data.startsWith("GRID SIZE")){
                         int temp = Integer.parseInt(getNumberString(data));
-                        System.out.println(temp);
                         gridSize = temp;
                     }
                     if(data.startsWith("NB OF NEIGHBOURS")){
                         int temp = Integer.parseInt(data.split(":")[1].trim());
-                        System.out.println(temp);
                         range = temp;
                     }
                     if(data.startsWith("NB OF ROUNDS")){
                         double temp = Double.parseDouble(data.split(":")[1].trim());
-                        System.out.println(temp);
                         nbOfRounds = (long) temp;
                     }
                     if(data.startsWith("GRUDGE*")){
                         grudgeStar = data.split(":")[1].trim().toLowerCase().equals("t");
-                        System.out.println(grudgeStar);
                     }
 
                 }
