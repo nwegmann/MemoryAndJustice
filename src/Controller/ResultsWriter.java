@@ -2,7 +2,6 @@ package Controller;
 
 
 import Analysis.GameOutcome;
-import Model.Game;
 
 import java.io.FileWriter;
 import java.io.File;

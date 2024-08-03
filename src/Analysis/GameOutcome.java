@@ -37,7 +37,7 @@ public class GameOutcome {
         }
     }
 
-    public void analyze(ArrayList<Player> players, ResultsWriter rw, Game game) {
+    public void analyze(ArrayList<Player> players, ResultsWriter rw) {
         initScoreMap();
         integratePlayers(players);
         aggregateStrategies();
