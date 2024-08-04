@@ -27,8 +27,8 @@ Where:
 - _p_def_ corresponds to the proportion of defectors in this game
 - _neighbors_ corresponds to the number of neighbors in this game
 - _memory_ corresponds to the _m_ value for the corresponding grudger strategy in this game
-- _strategy_ a strategy
-- _score_ the score of the players playing _strategy_ in this game
+- _strategy_ corresponds to a strategy
+- _score_ corresponds to the score of the players playing _strategy_ in this game
 
 ## Contact Information
 
